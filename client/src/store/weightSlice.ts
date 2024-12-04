@@ -38,6 +38,14 @@ export const setInitialWeights = createAsyncThunk(
   }
 );
 
+export const redeemReward = createAsyncThunk(
+  'weight/redeemReward',
+  async (cost: number) => {
+    // In a real app, you might want to call an API here
+    return cost;
+  }
+);
+
 const weightSlice = createSlice({
   name: 'weight',
   initialState,
@@ -62,6 +70,9 @@ const weightSlice = createSlice({
       .addCase(setInitialWeights.fulfilled, (state, action) => {
         state.initialWeight = action.payload.initialWeight;
         state.targetWeight = action.payload.targetWeight;
+      })
+      .addCase(redeemReward.fulfilled, (state, action) => {
+        state.totalCoins -= action.payload;
       });
   }
 });

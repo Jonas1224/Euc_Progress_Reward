@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../store/store';
 import { addWeightEntry } from '../store/weightSlice';
+import { showNotification } from '../store/notificationSlice';
 import { TextField, Button, Box, Paper, Fade } from '@mui/material';
 import LoadingSpinner from './common/LoadingSpinner';
 import ErrorAlert from './common/ErrorAlert';
@@ -22,8 +23,15 @@ const WeightEntryForm: React.FC = () => {
           date: new Date()
         })).unwrap();
         setWeight('');
+        dispatch(showNotification({
+          message: 'Weight entry added successfully!',
+          severity: 'success'
+        }));
       } catch (err) {
-        // Error is handled by Redux state
+        dispatch(showNotification({
+          message: 'Failed to add weight entry',
+          severity: 'error'
+        }));
       }
     }
   };
