@@ -10,6 +10,10 @@ import RestaurantIcon from '@mui/icons-material/Restaurant';
 import WeekendIcon from '@mui/icons-material/Weekend';
 import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
 import SpaIcon from '@mui/icons-material/Spa';
+import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism';
+import PetsIcon from '@mui/icons-material/Pets';
+import ChildCareIcon from '@mui/icons-material/ChildCare';
+import NatureIcon from '@mui/icons-material/Nature';
 
 interface Reward {
   id: string;
@@ -47,6 +51,45 @@ const rewards: Reward[] = [
     cost: 150,
     description: 'Treat yourself to a relaxing spa day',
     icon: <SpaIcon sx={{ fontSize: '3rem', color: '#e91e63' }} />
+  }
+];
+
+interface Donation {
+  id: string;
+  name: string;
+  cost: number;
+  description: string;
+  icon: React.ReactNode;
+}
+
+const donations: Donation[] = [
+  {
+    id: 'd1',
+    name: 'Feed the Hungry',
+    cost: 200,
+    description: 'Provide meals for families in need',
+    icon: <VolunteerActivismIcon sx={{ fontSize: '3rem', color: '#f44336' }} />
+  },
+  {
+    id: 'd2',
+    name: 'Animal Shelter Support',
+    cost: 150,
+    description: 'Help local animal shelters care for pets',
+    icon: <PetsIcon sx={{ fontSize: '3rem', color: '#9c27b0' }} />
+  },
+  {
+    id: 'd3',
+    name: 'Children\'s Education',
+    cost: 250,
+    description: 'Support education for underprivileged children',
+    icon: <ChildCareIcon sx={{ fontSize: '3rem', color: '#3f51b5' }} />
+  },
+  {
+    id: 'd4',
+    name: 'Plant Trees',
+    cost: 100,
+    description: 'Contribute to global reforestation efforts',
+    icon: <NatureIcon sx={{ fontSize: '3rem', color: '#4caf50' }} />
   }
 ];
 
@@ -127,6 +170,26 @@ const RewardsCatalog: React.FC = () => {
                 reward={reward}
                 onRedeem={() => handleRedeem(reward)}
                 disabled={totalCoins < reward.cost}
+              />
+            </Grid>
+          ))}
+        </Grid>
+      </Paper>
+
+      <Paper sx={{ p: 3 }}>
+        <Typography variant="h5" gutterBottom>
+          Philanthropic Projects
+        </Typography>
+        <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
+          Use your earned coins to make a difference in the world
+        </Typography>
+        <Grid container spacing={3}>
+          {donations.map((donation) => (
+            <Grid item xs={12} sm={6} md={3} key={donation.id}>
+              <RewardCard
+                reward={donation}
+                onRedeem={() => handleRedeem(donation)}
+                disabled={totalCoins < donation.cost}
               />
             </Grid>
           ))}
